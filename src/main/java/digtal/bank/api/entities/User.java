@@ -1,10 +1,9 @@
 package digtal.bank.api.entities;
 
 
+import digtal.bank.api.dto.DadosAtualizarUser;
+import digtal.bank.api.dto.DadosCadastroUser;
 import jakarta.persistence.*;
-
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
 
 
 @Table(name = "users")
@@ -12,7 +11,7 @@ import lombok.Getter;
 public class User {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String nome;
 
     private int telefone;
@@ -22,11 +21,11 @@ public class User {
 
 
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -74,7 +73,7 @@ public class User {
     public User() {
     }
 
-    public User(int id, String nome,int telefone, String senha, String email, int balance) {
+    public User(Long id, String nome,int telefone, String senha, String email, int balance) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
@@ -94,16 +93,14 @@ public class User {
     }
 
 
+    public void atualizarInformaçoes(DadosAtualizarUser dados) {
+       if (dados.nome() != null){
+           this.nome = dados.nome();
+       }
+        if (dados.email() != null){
+        this.email = dados.email();
+        }
 
 
-
-
-
-
-
-
-
-
-
-
+    }
 }

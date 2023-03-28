@@ -1,10 +1,10 @@
 package digtal.bank.api.controller;
 
 
-import digtal.bank.api.entities.DadosCadastroUser;
-import digtal.bank.api.entities.DadosListagemUser;
-import digtal.bank.api.entities.User;
-import digtal.bank.api.repository.UserRepository;
+import digtal.bank.api.dto.DadosAtualizarUser;
+import digtal.bank.api.dto.DadosCadastroUser;
+import digtal.bank.api.dto.DadosListagemUser;
+import digtal.bank.api.service.ServiceUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -16,18 +16,34 @@ import java.util.List;
 @RequestMapping({"/users"})
 public class UserController {
 
+
+    private final ServiceUser serviceUser;
     @Autowired
-    private UserRepository repository;
+    public UserController(ServiceUser serviceUser) {
+        this.serviceUser = serviceUser;
+    }
 
 
-    @PostMapping({"/registrar"})
+    @PostMapping
     @Transactional
     public void cadastrar(@RequestBody DadosCadastroUser dados){
-        repository.save(new User(dados));
+        serviceUser.salvarUsuario(dados);
 }
-    @GetMapping({"/listar"})
+    @GetMapping
     public List<DadosListagemUser>listar(){
-    return repository.findAll().stream().map(DadosListagemUser::new).toList();
+    return serviceUser.listarUsuario();
+    }
+    @PutMapping
+    @Transactional
+    public void atualizar(@RequestBody DadosAtualizarUser dados){
+       serviceUser.atualizarUser(dados);
+    }
+
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluir(@PathVariable Long id){
+        serviceUser.excluirUser(id);
     }
 
 }

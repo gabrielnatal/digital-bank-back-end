@@ -1,4 +1,4 @@
-package digtal.bank.api.entities;
+package digtal.bank.api.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
