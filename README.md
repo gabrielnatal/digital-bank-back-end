@@ -8,7 +8,7 @@ Este projeto é uma API RESTful para gerenciamento de usuários de um banco digi
 -Spring Data JPA
 -Banco de Dados
 
-Funcionalidades
+###Funcionalidades
 -Criar contas
 -Excluir contas
 -Listar usuários
