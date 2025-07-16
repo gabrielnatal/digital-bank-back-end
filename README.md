@@ -10,7 +10,7 @@ Maven,
 Spring Data JPA e
 Banco de Dados
 
-Funcionalidades
+Funcionalidades:
 Criar contas,
 Excluir contas,
 Listar usuários,
